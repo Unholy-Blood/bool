@@ -9,10 +9,34 @@
 </head>
 
 <body>
-    
+    <!-- Declaring the series name -->
+    <script>
+        let segments = window.location.pathname.split('/');
+        let toDelete = [];
+        for (let i = 0; i < segments.length; i++) {
+            if (segments[i].length < 1) {
+                toDelete.push(i);
+            }
+            for (let i = 0; i < toDelete.length; i++) {
+                segments.splice(toDelete[i], 1);
+                for (let j = i; j < toDelete.length; j++) {
+                    (toDelete[j])--;
+                }
+            }
+        }
+        // filename = parent folder
+        let filename = segments[segments.length - 1];
+        let series_name = filename
+        document.title = series_name
+    </script>
+
     <!-- title and links in center -->
     <center>
-        <h1>Index of Unholy Blood</h1>
+        <h1>
+            <!-- heading -->
+            <div id="heading"></div>
+            <script>document.getElementById("heading").innerHTML = 'Index of ' + series_name</script>
+        </h1>
         <hr>
         <div id="links"></div>
     </center>
@@ -31,42 +55,47 @@
             }
         }
     </script>
-    
-    <!-- Loading Index -->
-    <script>
-        let total_chapters = Math. pow(10, 1000);
 
-       index_loading:{
-        for(chapter_num=1; chapter_num<total_chapters; chapter_num++)
-        if(doesFileExist(chapter_num)){
-            var episode_num = chapter_num-1
-            if(doesFileExist(chapter_num)){
-                document.getElementById("links").innerHTML = document.getElementById("links").innerHTML +'<br>'+'<a href="'+chapter_num+'/">Unholy Blood, Chapter '+chapter_num+'</a>';
-            }        
+    <!-- Loading Index and all links-->
+    <script>
+        let total_chapters = Math.pow(10, 1000);
+
+        index_loading: {
+            for (chapter_num = 1; chapter_num < total_chapters; chapter_num++)
+                if (doesFileExist(chapter_num)) {
+                    var episode_num = chapter_num - 1
+                    if (doesFileExist(chapter_num)) {
+                        document.getElementById("links").innerHTML = document.getElementById("links").innerHTML + '<br>' + '<a href="' + chapter_num + '/">' + series_name + ', Chapter ' + chapter_num + '</a>';
+                    }
+                }
+                else {
+                    console.clear()
+                    break index_loading;
+                }
         }
-        else{
-            console.clear()
-            break index_loading;
-        }
-    }
     </script>
 
     <!-- stylesheet for <a> tag-->
     <style>
-        a{
+        a {
             font-size: 20px;
             text-decoration: none;
         }
-        a:link{
-            color: saddlebrown;
+
+        a:link {
+            color: red;
         }
-        a:visited{
+
+        a:visited {
             color: green;
         }
-        a:hover{
+
+        a:hover {
             color: hotpink;
+            text-decoration: underline;
         }
-        a:active{
+
+        a:active {
             color: blue;
         }
     </style>
