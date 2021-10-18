@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unholy Blood</title>
+</head>
+
+<body>
+    
+    <!-- title and links in center -->
+    <center>
+        <h1>Index of Unholy Blood</h1>
+        <hr>
+        <div id="links"></div>
+    </center>
+
+    <!-- Function does file exist -->
+    <script>
+        function doesFileExist(urlToFile) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('HEAD', urlToFile, false);
+            xhr.send();
+
+            if (xhr.status == "404") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+    
+    <!-- Loading Index -->
+    <script>
+        let total_chapters = Math. pow(10, 1000);
+
+       index_loading:{
+        for(chapter_num=1; chapter_num<total_chapters; chapter_num++)
+        if(doesFileExist(chapter_num)){
+            var episode_num = chapter_num-1
+            if(doesFileExist(chapter_num)){
+                document.getElementById("links").innerHTML = document.getElementById("links").innerHTML +'<br>'+'<a href="'+chapter_num+'/">Unholy Blood, Chapter '+chapter_num+'</a>';
+            }        
+        }
+        else{
+            console.clear()
+            break index_loading;
+        }
+    }
+    </script>
+
+    <!-- stylesheet for <a> tag-->
+    <style>
+        a{
+            font-size: 20px;
+            text-decoration: none;
+        }
+        a:link{
+            color: saddlebrown;
+        }
+        a:visited{
+            color: green;
+        }
+        a:hover{
+            color: hotpink;
+        }
+        a:active{
+            color: blue;
+        }
+    </style>
+</body>
+
+</html>
